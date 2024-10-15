@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-    private Rigidbody2D _rb2d;
+    private Rigidbody2D rb;
     private float fuel = 100f;
     
     private readonly float SPEED = 5f;
@@ -10,14 +10,14 @@ public class Rocket : MonoBehaviour
     
     void Awake()
     {
-        _rb2d = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
     
     public void Shoot()
     {
         if(fuel >= 10)
         {
-            _rb2d.AddForce(Vector2.up * SPEED);
+            rb.AddForce(Vector2.up * SPEED,ForceMode2D.Impulse); // 백터의 방향과 크기로 힘을 줌
             fuel -= FUELPERSHOOT;
         }
         else
