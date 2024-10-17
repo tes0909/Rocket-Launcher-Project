@@ -1,4 +1,7 @@
 using UnityEngine;
+using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
 {
@@ -7,10 +10,21 @@ public class Rocket : MonoBehaviour
     
     private readonly float SPEED = 5f;
     private readonly float FUELPERSHOOT = 10f;
-    
+
+    [SerializeField] private TextMeshProUGUI currentScoreTxt;
+    [SerializeField] private TextMeshProUGUI highScoreTxt;
+
+    private const string key = "highScore";
+
+    private int currentScore = 0;
+    private int highScore = 0;
+    private float maxHeight = 0f;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        currentScoreTxt.text = $"{currentScore} M";
+        highScoreTxt.text = $"{highScore} M";
     }
     
     public void Shoot()
@@ -26,5 +40,25 @@ public class Rocket : MonoBehaviour
         }
        
         // TODO : fuel이 넉넉하면 윗 방향으로 SPEED만큼의 힘으로 점프, 모자라면 무시
+    }
+    private void Update()
+    {
+        float Height = transform.position.y;
+
+        if (Height > maxHeight) 
+        {
+            maxHeight = Height;
+            PlayerPrefs.SetFloat(key, maxHeight);
+            highScoreTxt.text = $"HIGH : {maxHeight:F0} M";
+        }
+        else
+        {
+            currentScoreTxt.text = $"{Height:F0} M";
+        }
+    }
+    
+    public void RetryButton()
+    {
+        SceneManager.LoadScene("RocketLauncher");
     }
 }
