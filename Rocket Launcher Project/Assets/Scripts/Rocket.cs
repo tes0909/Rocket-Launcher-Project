@@ -15,6 +15,7 @@ public class Rocket : MonoBehaviour
     [SerializeField] private TextMeshProUGUI highScoreTxt;
 
     private const string key = "highScore";
+    private const string RocketLauncherScene = "RocketLauncher";
 
     private float maxHeight = 0f;
 
@@ -55,6 +56,6 @@ public class Rocket : MonoBehaviour
     
     public void RetryButton()
     {
-        SceneManager.LoadScene("RocketLauncher");
+        SceneManager.LoadScene(RocketLauncherScene);
     }
 }
