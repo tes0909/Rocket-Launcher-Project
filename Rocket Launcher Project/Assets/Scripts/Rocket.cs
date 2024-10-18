@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Rocket : MonoBehaviour
 {
     private Rigidbody2D rb;
+    SpriteRenderer rbSprite;
     private float fuel = 100f;
     
     private readonly float SPEED = 5f;
@@ -33,19 +34,18 @@ public class Rocket : MonoBehaviour
         }
         else
         {
-
+            PlayerPrefs.SetFloat(key, maxHeight);
         }
        
         // TODO : fuel이 넉넉하면 윗 방향으로 SPEED만큼의 힘으로 점프, 모자라면 무시
     }
     private void Update()
     {
-        float Height = transform.position.y;
+        float Height = transform.position.y; // 발판과로켓길이 
 
         if (Height > maxHeight) 
         {
             maxHeight = Height;
-            PlayerPrefs.SetFloat(key, maxHeight);
             highScoreTxt.text = $"HIGH : {maxHeight:F0} M";
         }
         else
