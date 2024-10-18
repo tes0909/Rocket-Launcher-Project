@@ -16,15 +16,11 @@ public class Rocket : MonoBehaviour
 
     private const string key = "highScore";
 
-    private int currentScore = 0;
-    private int highScore = 0;
     private float maxHeight = 0f;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        currentScoreTxt.text = $"{currentScore} M";
-        highScoreTxt.text = $"{highScore} M";
     }
     
     public void Shoot()
