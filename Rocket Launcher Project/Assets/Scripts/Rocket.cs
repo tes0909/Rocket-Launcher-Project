@@ -23,6 +23,7 @@ public class Rocket : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        transform.position = Vector2.zero;
     }
     
     public void Shoot()
