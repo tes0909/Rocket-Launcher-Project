@@ -7,10 +7,10 @@ public class Rocket : MonoBehaviour
 {
     private Rigidbody2D rb;
     SpriteRenderer rbSprite;
-    private float fuel = 100f;
     
-    private readonly float SPEED = 5f;
-    private readonly float FUELPERSHOOT = 10f;
+    private float Fuel = 100f;
+    private readonly float Speed = 5f;
+    private readonly float FuelPerShoot = 10f; 
 
     [SerializeField] private TextMeshProUGUI currentScoreTxt;
     [SerializeField] private TextMeshProUGUI highScoreTxt;
@@ -28,17 +28,13 @@ public class Rocket : MonoBehaviour
     
     public void Shoot()
     {
-        if(fuel >= 10)
+        if(Fuel >= FuelPerShoot)
         {
-            rb.AddForce(Vector2.up * SPEED,ForceMode2D.Impulse); // 백터의 방향과 크기로 힘을 줌
-            fuel -= FUELPERSHOOT;
+            rb.AddForce(Vector2.up * Speed,ForceMode2D.Impulse); // 백터의 방향과 크기로 힘을 줌
+            Fuel -= FuelPerShoot;
+            return;
         }
-        else
-        {
             PlayerPrefs.SetFloat(key, maxHeight);
-        }
-       
-        // TODO : fuel이 넉넉하면 윗 방향으로 SPEED만큼의 힘으로 점프, 모자라면 무시
     }
     private void Update()
     {
